@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import Link from "next/link";
 
@@ -25,7 +26,6 @@ export default function Register() {
                                 placeholder="Your Email"
                             />
                         </div>
-
                         <div>
                             <label
                                 htmlFor="password"
@@ -47,7 +47,6 @@ export default function Register() {
                     >
                         login
                     </button>
-
                     <p className="flex justify-center mt-6 text-sm text-slate-600">
                         I don't have account?{" "}
                         <Link href="/register" className="ml-1 text-sm font-semibold text-slate-700 underline">
