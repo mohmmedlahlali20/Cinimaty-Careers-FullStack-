@@ -17,23 +17,25 @@ export default function Register() {
 
     const register = async (e) => {
         e.preventDefault();
+        setErrorMessage("");
         if (!fullName || !email || !password) {
             setErrorMessage("All fields are required!");
             return;
         }
         try {
-            dispatch(registerAction({ fullName, email, password }));
+            console.log("Registering user:", { fullName, email, password });
             const res = await path.post('/api/register', { fullName, email, password });
-
-            if (res.status === 201) {
-                redirect('/login');
+            console.log("API Response:", res);
+    
+            if (res.status === 201 || res.data.success) {
+                window.location.href = '/login';
+            } else {
+                console.error("Unexpected Response:", res);
+                setErrorMessage(res.data.message || "Registration failed!");
             }
         } catch (err) {
-            if (err.response && err.response.data) {
-                setErrorMessage(err.response.data.message || "Registration failed!");
-            } else {
-                setErrorMessage("Something went wrong. Please try again!");
-            }
+            console.error("API Error:", err);
+            setErrorMessage(err.response?.data?.message || "Something went wrong. Please try again!");
         }
     };
 
