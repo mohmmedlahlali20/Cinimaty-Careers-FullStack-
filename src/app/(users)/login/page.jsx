@@ -26,11 +26,8 @@ export default function Register() {
         try {
             const res = await path.post('/api/login', { email, password });
             console.log('Login successful:', res.data);
-
             Cookies.set('token', res.data.token);
-
             dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
-
             window.location.href = '/dashboard';
         } catch (err) {
             console.error('Login function error:', err);
