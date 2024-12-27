@@ -1,37 +1,35 @@
 'use client';
 
-
-import React, { useState } from "react";
-import Link from "next/link";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from 'react';
+import Link from 'next/link';
 import Cookies from 'js-cookie';
-import path from "app/utils/path";
+import axios from 'axios';
 
-export default function Register() {
+export default function LoginForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-
-    const { loading } = useSelector((state) => state.auth); 
-    const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
 
     const login = async (e) => {
         e.preventDefault();
         setErrorMessage('');
+        setLoading(true);
+
         if (!email || !password) {
             setErrorMessage('Email and password are required!');
+            setLoading(false);
             return;
         }
 
         try {
-            const res = await path.post('/api/login', { email, password });
-            console.log('Login successful:', res.data);
+            const res = await axios.post('/api/login', { email, password });
             Cookies.set('token', res.data.token);
-            dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
             window.location.href = '/dashboard';
         } catch (err) {
-            console.error('Login function error:', err);
             setErrorMessage(err.response?.data?.message || 'Login failed. Please try again.');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -45,10 +43,7 @@ export default function Register() {
                 <form onSubmit={login} className="mt-8 mb-2 w-80 sm:w-96">
                     <div className="mb-4 flex flex-col gap-6">
                         <div>
-                            <label
-                                htmlFor="email"
-                                className="block mb-2 text-sm text-slate-600"
-                            >
+                            <label htmlFor="email" className="block mb-2 text-sm text-slate-600">
                                 Email
                             </label>
                             <input
@@ -61,10 +56,7 @@ export default function Register() {
                             />
                         </div>
                         <div>
-                            <label
-                                htmlFor="password"
-                                className="block mb-2 text-sm text-slate-600"
-                            >
+                            <label htmlFor="password" className="block mb-2 text-sm text-slate-600">
                                 Password
                             </label>
                             <input
@@ -77,20 +69,16 @@ export default function Register() {
                             />
                         </div>
                     </div>
-                    {errorMessage && (
-                        <p className="text-sm text-red-500">{errorMessage}</p>
-                    )}
+                    {errorMessage && <p className="text-sm text-red-500">{errorMessage}</p>}
                     <button
                         type="submit"
                         disabled={loading}
-                        className={`mt-4 w-full bg-slate-800 text-white text-sm py-2 rounded-md hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-500 ${
-                            loading ? 'opacity-50 cursor-not-allowed' : ''
-                        }`}
+                        className="mt-4 w-full bg-slate-800 text-white text-sm py-2 rounded-md hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-500 disabled:opacity-50"
                     >
                         {loading ? 'Logging in...' : 'Login'}
                     </button>
                     <p className="flex justify-center mt-6 text-sm text-slate-600">
-                        I don't have an account?{' '}
+                        Don't have an account?{' '}
                         <Link href="/register" className="ml-1 text-sm font-semibold text-slate-700 underline">
                             Register
                         </Link>

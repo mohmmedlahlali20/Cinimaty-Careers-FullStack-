@@ -1,41 +1,38 @@
 'use client';
 import React, { useState } from "react";
 import Link from "next/link";
-import { useDispatch, useSelector } from "react-redux";
-import { register as registerAction } from "app/_store/slice/authSlice";
 import path from "app/utils/path";
-import { redirect } from "next/navigation";
 
 export default function Register() {
     const [email, setEmail] = useState("");
     const [fullName, setFullName] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
-
-    const { loading } = useSelector((state) => state.auth);
-    const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
 
     const register = async (e) => {
         e.preventDefault();
         setErrorMessage("");
+
         if (!fullName || !email || !password) {
             setErrorMessage("All fields are required!");
             return;
         }
+
+        setLoading(true);
+
         try {
-            console.log("Registering user:", { fullName, email, password });
             const res = await path.post('/api/register', { fullName, email, password });
-            console.log("API Response:", res);
-    
+
             if (res.status === 201 || res.data.success) {
                 window.location.href = '/login';
             } else {
-                console.error("Unexpected Response:", res);
                 setErrorMessage(res.data.message || "Registration failed!");
             }
         } catch (err) {
-            console.error("API Error:", err);
             setErrorMessage(err.response?.data?.message || "Something went wrong. Please try again!");
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -100,7 +97,7 @@ export default function Register() {
                             loading ? 'bg-gray-400' : 'bg-slate-800 hover:bg-slate-700'
                         } text-white text-sm py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-500`}
                     >
-                        {loading ? 'Signing Up...' : 'Sign Up'}
+                        {loading ? "Registering..." : "Sign Up"}
                     </button>
                     <p className="flex justify-center mt-6 text-sm text-slate-600">
                         Already have an account?{" "}
