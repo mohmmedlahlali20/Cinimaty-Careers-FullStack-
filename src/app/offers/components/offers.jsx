@@ -1,10 +1,12 @@
-import React from "react";
-import fetchOffers from "../utils/getOffers";
-import SearchBar from "./searchBar";
+import React from 'react';
+import fetchOffers from '../utils/getOffers';
+import SearchBar from './SearchBar';
+import OfferCard from './OfferCard';
+
 
 const Offers = async ({ searchParams }) => {
     const offers = await fetchOffers();
-    const searchQuery = searchParams.query?.toLowerCase() || "";
+    const searchQuery = searchParams.query?.toLowerCase() || '';
 
     const filteredOffers = offers.filter((offer) =>
         offer.title.toLowerCase().includes(searchQuery) ||
@@ -21,41 +23,7 @@ const Offers = async ({ searchParams }) => {
             <SearchBar />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
                 {filteredOffers.map((offer) => (
-                    <div
-                        key={offer._id}
-                        className="bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300"
-                    >
-                        <div className="p-6">
-                            <h2 className="text-2xl font-bold text-gray-800 mb-4">
-                                {offer.title}
-                            </h2>
-                            <p className="text-gray-600 mb-4">
-                                {offer.description}
-                            </p>
-                            <div className="flex flex-wrap gap-2 mt-4">
-                                <span className="inline-block bg-purple-100 text-purple-800 text-sm font-semibold px-4 py-2 rounded-full">
-                                    {offer.slayer}
-                                </span>
-                                <div className="flex flex-wrap gap-2 mt-4">
-                                    {offer.competences.map((competence, index) => (
-                                        <span
-                                            key={index}
-                                            className="inline-block bg-pink-100 text-pink-800 text-sm font-semibold px-4 py-2 rounded-full"
-                                        >
-                                            {competence}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                            <div className="mt-6 text-center">
-                                <button
-                                    className="px-6 py-3 bg-purple-500 text-white font-bold rounded-lg shadow-md hover:bg-purple-600 focus:ring-4 focus:ring-purple-300 transition duration-300"
-                                >
-                                    Apply Now
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    <OfferCard key={offer._id} offer={offer} />
                 ))}
             </div>
         </div>
@@ -63,4 +31,3 @@ const Offers = async ({ searchParams }) => {
 };
 
 export default Offers;
-
