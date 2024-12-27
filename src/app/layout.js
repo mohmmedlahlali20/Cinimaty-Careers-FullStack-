@@ -1,6 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Providers from "./global/provider";
 
 
 const geistSans = Geist({
@@ -25,7 +24,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <section className="">
-        <Providers>{children}</Providers>
+          {children}
         </section>
       </body>
     </html>
