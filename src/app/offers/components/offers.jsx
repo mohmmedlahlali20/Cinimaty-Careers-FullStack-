@@ -10,8 +10,6 @@ const Offers = async ({ searchParams }) => {
 
     const filteredOffers = offers.filter((offer) =>
         offer.title.toLowerCase().includes(searchQuery) ||
-        offer.description.toLowerCase().includes(searchQuery) ||
-        offer.slayer.toLowerCase().includes(searchQuery) ||
         offer.competences.some((comp) => comp.toLowerCase().includes(searchQuery))
     );
 
