@@ -6,11 +6,11 @@ import OfferCard from './OfferCard';
 
 const Offers = async ({ searchParams }) => {
     const offers = await fetchOffers();
-    const searchQuery = searchParams.query?.toLowerCase() || '';
+    const query = searchParams.query?.toLowerCase() || '';
 
     const filteredOffers = offers.filter((offer) =>
-        offer.title.toLowerCase().includes(searchQuery) ||
-        offer.competences.some((comp) => comp.toLowerCase().includes(searchQuery))
+        offer.title.toLowerCase().includes(query) ||
+        offer.competences.some((comp) => comp.toLowerCase().includes(query))
     );
 
     return (
