@@ -1,12 +1,30 @@
-import { redirect } from "next/navigation";
+'use client';
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import Cookies from "js-cookie";
-
+import {jwtDecode} from "jwt-decode";
 
 export default function DashboardLayout({ children }) {
+  const router = useRouter(); 
+  const token = Cookies.get("token");
 
-
+  useEffect(() => {
+    if (!token) {
+      router.push("/login"); 
+    } else {
+      try {
+        const decodedToken = jwtDecode(token);
+        console.log("decodedToken", decodedToken.role);
+        if(decodedToken.role !== "admin") router.push('/offers')
+      } catch (error) {
+        console.error("Invalid token", error);
+        router.push("/login");
+      }
+    }
+  }, [token, router]);
 
   return (
     <div className="flex h-screen bg-gray-100">
@@ -20,5 +38,5 @@ export default function DashboardLayout({ children }) {
         </main>
       </div>
     </div>
-  )
+  );
 }
