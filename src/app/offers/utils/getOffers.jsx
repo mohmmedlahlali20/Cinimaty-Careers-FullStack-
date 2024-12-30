@@ -1,5 +1,6 @@
 import nestApi from "app/utils/pathNest";
 
+
 async function fetchOffers() {
     try {
         const response = await nestApi.get("/offers");

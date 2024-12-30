@@ -33,7 +33,7 @@ const OfferCard = ({ offer }) => {
                 </div>
                 <div className="mt-6 text-center">
                     <button
-                        onClick={handleApplyClick} // Add click handler
+                        onClick={handleApplyClick} 
                         className="px-6 py-3 bg-purple-500 text-white font-bold rounded-lg shadow-md hover:bg-purple-600 focus:ring-4 focus:ring-purple-300 transition duration-300"
                     >
                         Apply Now
