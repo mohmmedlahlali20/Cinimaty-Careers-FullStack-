@@ -1,7 +1,6 @@
 import React from "react";
 import fetchOffer from "../utils/GetOneOffer";
 import Form from "./components/Form";
-import onSubmit from "../utils/Application"; // Import onSubmit
 
 export default async function OfferPage({ params }) {
     const { id } = params;
@@ -27,7 +26,7 @@ export default async function OfferPage({ params }) {
                         </ul>
                     </div>
                 </div>
-                <Form id={id} onSubmit={onSubmit} />
+                <Form id={id} />
             </div>
         </div>
     );
