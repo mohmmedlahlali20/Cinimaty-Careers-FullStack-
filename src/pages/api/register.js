@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 export default async function register(req, res) {
     if (req.method === "POST") {
         await dbConnect();
-        const { fullName, email, password } = req.body;
+        const { fullName, email, password, role } = req.body;
         if (!fullName || !email || !password) {
             return res.status(400).json({ success: false, message: "Tous les champs sont requis" });
         }
@@ -18,7 +18,7 @@ export default async function register(req, res) {
 
         const hashedPassword = await bcrypt.hash(password, 10);
         try {
-            const user = await User.create({ fullName, email, password: hashedPassword });
+            const user = await User.create({ fullName, email, password: hashedPassword, role });
             res.status(201).json({ success: true, user });
         } catch (error) {
             console.error(error);
