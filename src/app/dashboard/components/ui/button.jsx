@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef, Fragment } from 'react'
 
 const buttonVariants = {
   default: "bg-primary text-primary-foreground hover:bg-primary/90",
@@ -16,14 +16,14 @@ const buttonSizes = {
   icon: "h-10 w-10",
 }
 
-const Button = React.forwardRef(({ 
+const Button = forwardRef(({ 
   className, 
   variant = "default", 
   size = "default", 
   asChild = false,
   ...props 
 }, ref) => {
-  const Comp = asChild ? React.Fragment : "button"
+  const Comp = asChild ? Fragment : "button"
   return (
     <Comp
       className={`inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ${buttonVariants[variant]} ${buttonSizes[size]} ${className}`}

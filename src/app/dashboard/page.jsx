@@ -1,3 +1,4 @@
+'use client'
 import { Overview } from "./components/Overview";
 import { RecentSales } from "./components/RecentSales";
 import { Card, CardContent, CardHeader, CardTitle } from "./components/ui/Card";
@@ -119,22 +120,22 @@ export default function DashboardPage() {
         </Card>
       </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-        {/* <Card className="col-span-4">
+        <Card className="col-span-4">
           <CardHeader>
             <CardTitle>Overview</CardTitle>
           </CardHeader>
           <CardContent>
             <Overview />
           </CardContent>
-        </Card> */}
-        {/* <Card className="col-span-3">
+        </Card>
+        <Card className="col-span-3">
           <CardHeader>
             <CardTitle>Recent Sales</CardTitle>
           </CardHeader>
           <CardContent>
             <RecentSales />
           </CardContent>
-        </Card> */}
+        </Card>
       </div>
     </div>
   )

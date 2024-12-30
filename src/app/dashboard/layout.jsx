@@ -1,8 +1,13 @@
+import { redirect } from "next/navigation";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
+import Cookies from "js-cookie";
 
 
 export default function DashboardLayout({ children }) {
+
+
+
   return (
     <div className="flex h-screen bg-gray-100">
       <Sidebar />

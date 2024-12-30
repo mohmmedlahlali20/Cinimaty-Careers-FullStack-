@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 
-const Avatar = React.forwardRef(({ className, ...props }, ref) => {
+const Avatar = forwardRef(({ className, ...props }, ref) => {
   return (
     <span
       ref={ref}
@@ -11,7 +11,7 @@ const Avatar = React.forwardRef(({ className, ...props }, ref) => {
 })
 Avatar.displayName = "Avatar"
 
-const AvatarImage = React.forwardRef(({ className, src, alt = "", ...props }, ref) => {
+const AvatarImage = forwardRef(({ className, src, alt = "", ...props }, ref) => {
   return (
     <img
       ref={ref}
@@ -24,7 +24,7 @@ const AvatarImage = React.forwardRef(({ className, src, alt = "", ...props }, re
 })
 AvatarImage.displayName = "AvatarImage"
 
-const AvatarFallback = React.forwardRef(({ className, ...props }, ref) => {
+const AvatarFallback =forwardRef(({ className, ...props }, ref) => {
   return (
     <div
       ref={ref}
