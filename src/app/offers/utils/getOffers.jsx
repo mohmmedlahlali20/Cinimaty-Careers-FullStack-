@@ -1,4 +1,4 @@
-import nestApi from "app/utils/pathNest";
+import nestApi from "../../utils/pathNest";
 
 
 async function fetchOffers() {
