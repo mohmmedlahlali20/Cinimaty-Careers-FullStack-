@@ -23,6 +23,7 @@ async function uploadToCloudinary(fileBuffer, options) {
 }
 
 export default async function Postuler(req, res) {
+  
   if (req.method !== 'POST') {
     return res.status(405).json({ success: false, message: 'Méthode non autorisée.' });
   }

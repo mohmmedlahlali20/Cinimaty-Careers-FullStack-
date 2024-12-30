@@ -4,10 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Cookies from 'js-cookie';
 import axios from 'axios';
-import { useRouter } from 'next/router';
 
-
-const router = useRouter();
 export default function LoginForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -26,21 +23,9 @@ export default function LoginForm() {
         }
 
         try {
-            const res = await axios.post('/api/login', { email, password })
-
-            const { token, user } = res.data;
-            Cookies.set('token', token);
-
-            if (token) {
-                Cookies.set('token', token);
-                if (user.role === 'admin') {
-                    router.push('/admin');
-                } else {
-                    router.push('/offers');
-                }
-            } else {
-                setErrorMessage('No token received. Login failed.');
-            }
+            const res = await axios.post('/api/login', { email, password });
+            Cookies.set('token', res.data.token);
+            window.location.href = '/dashboard';
         } catch (err) {
             setErrorMessage(err.response?.data?.message || 'Login failed. Please try again.');
         } finally {
