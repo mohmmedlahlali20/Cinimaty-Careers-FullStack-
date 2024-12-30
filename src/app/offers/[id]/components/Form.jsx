@@ -1,30 +1,47 @@
 'use client'
-import React, {useState} from 'react';
+
+import React, { useState } from "react";
 
 function Form({ id, onSubmit }) {
-
     const [formData, setFormData] = useState({
         nom: "",
         prenom: "",
-        cv: null,
+        cv: "",
         letterCover: "",
         numeroTelephone: "",
         localisation: "",
         dateDisponibilite: "",
-        offerId: id,
     });
 
     const handleChange = (e) => {
-        const { name, value, files } = e.target;
-        setFormData((prev) => ({
-            ...prev,
-            [name]: files ? files[0] : value,
-        }));
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
+
+        const payload = { ...formData, offerId: id };
+
+        try {
+            const response = await fetch(`/api/Application`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+            });
+
+            if (response.ok) {
+                alert("Application submitted successfully!");
+            } else {
+                const errorData = await response.json();
+                alert(`Error: ${errorData.message}`);
+            }
+        } catch (error) {
+            console.error("Submission error:", error);
+            alert("Failed to submit application.");
+        }
     };
 
     return (
@@ -34,10 +51,7 @@ function Form({ id, onSubmit }) {
             </h2>
             <form className="space-y-6" onSubmit={handleSubmit}>
                 <div>
-                    <label
-                        htmlFor="nom"
-                        className="block text-sm font-medium text-gray-700"
-                    >
+                    <label htmlFor="nom" className="block text-sm font-medium text-gray-700">
                         Nom
                     </label>
                     <input
@@ -51,10 +65,7 @@ function Form({ id, onSubmit }) {
                     />
                 </div>
                 <div>
-                    <label
-                        htmlFor="prenom"
-                        className="block text-sm font-medium text-gray-700"
-                    >
+                    <label htmlFor="prenom" className="block text-sm font-medium text-gray-700">
                         Prénom
                     </label>
                     <input
@@ -69,10 +80,7 @@ function Form({ id, onSubmit }) {
                     />
                 </div>
                 <div>
-                    <label
-                        htmlFor="cv"
-                        className="block text-sm font-medium text-gray-700"
-                    >
+                    <label htmlFor="cv" className="block text-sm font-medium text-gray-700">
                         CV
                     </label>
                     <input
@@ -80,15 +88,12 @@ function Form({ id, onSubmit }) {
                         name="cv"
                         type="file"
                         required
-                        value={formData.cv}
+                        onChange={handleChange}
                         className="mt-2 w-full border border-gray-300 rounded-lg shadow-sm p-3 focus:ring-purple-500 focus:border-purple-500"
                     />
                 </div>
                 <div>
-                    <label
-                        htmlFor="letterCover"
-                        className="block text-sm font-medium text-gray-700"
-                    >
+                    <label htmlFor="letterCover" className="block text-sm font-medium text-gray-700">
                         Lettre de motivation
                     </label>
                     <textarea
@@ -96,15 +101,13 @@ function Form({ id, onSubmit }) {
                         name="letterCover"
                         rows="4"
                         value={formData.letterCover}
+                        onChange={handleChange}
                         className="mt-2 w-full border border-gray-300 rounded-lg shadow-sm p-3 focus:ring-purple-500 focus:border-purple-500"
                         placeholder="Expliquez pourquoi vous êtes le meilleur candidat..."
                     ></textarea>
                 </div>
                 <div>
-                    <label
-                        htmlFor="numeroTelephone"
-                        className="block text-sm font-medium text-gray-700"
-                    >
+                    <label htmlFor="numeroTelephone" className="block text-sm font-medium text-gray-700">
                         Numéro de Téléphone
                     </label>
                     <input
@@ -112,16 +115,14 @@ function Form({ id, onSubmit }) {
                         name="numeroTelephone"
                         type="tel"
                         value={formData.numeroTelephone}
+                        onChange={handleChange}
                         required
                         className="mt-2 w-full border border-gray-300 rounded-lg shadow-sm p-3 focus:ring-purple-500 focus:border-purple-500"
                         placeholder="06xxxxxxxx"
                     />
                 </div>
                 <div>
-                    <label
-                        htmlFor="localisation"
-                        className="block text-sm font-medium text-gray-700"
-                    >
+                    <label htmlFor="localisation" className="block text-sm font-medium text-gray-700">
                         Localisation
                     </label>
                     <input
@@ -129,16 +130,14 @@ function Form({ id, onSubmit }) {
                         name="localisation"
                         type="text"
                         value={formData.localisation}
+                        onChange={handleChange}
                         required
                         className="mt-2 w-full border border-gray-300 rounded-lg shadow-sm p-3 focus:ring-purple-500 focus:border-purple-500"
                         placeholder="Votre localisation"
                     />
                 </div>
                 <div>
-                    <label
-                        htmlFor="dateDisponibilite"
-                        className="block text-sm font-medium text-gray-700"
-                    >
+                    <label htmlFor="dateDisponibilite" className="block text-sm font-medium text-gray-700">
                         Date de disponibilité
                     </label>
                     <input
@@ -146,17 +145,13 @@ function Form({ id, onSubmit }) {
                         name="dateDisponibilite"
                         type="date"
                         value={formData.dateDisponibilite}
+                        onChange={handleChange}
                         required
                         className="mt-2 w-full border border-gray-300 rounded-lg shadow-sm p-3 focus:ring-purple-500 focus:border-purple-500"
                     />
                 </div>
                 <div>
-                    <input
-                        id="offerId"
-                        name="offerId"
-                        type="hidden"
-                        value={id}
-                    />
+                    <input id="offerId" name="offerId" type="hidden" value={id} />
                 </div>
                 <button
                     type="submit"
