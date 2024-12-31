@@ -1,8 +1,9 @@
 'use client'
-
 import React, { useState } from "react";
 
 function Form({ id, onSubmit }) {
+    console.log(id);
+
     const [formData, setFormData] = useState({
         nom: "",
         prenom: "",
@@ -10,28 +11,40 @@ function Form({ id, onSubmit }) {
         letterCover: "",
         numeroTelephone: "",
         localisation: "",
-        dateDisponibilite: "",
+        // dateDisponibilite: "",
+        offerId: id
     });
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        const { name, value, files } = e.target;
+    
+        if (name === "cv") {
+            setFormData({ ...formData, [name]: files[0] }); // Store the file object
+        } else {
+            setFormData({ ...formData, [name]: value });
+        }
     };
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const payload = { ...formData, offerId: id };
-
+    
+        const formDataToSend = new FormData();
+        formDataToSend.append("nom", formData.nom);
+        formDataToSend.append("prenom", formData.prenom);
+        formDataToSend.append("letterCover", formData.letterCover);
+        formDataToSend.append("numeroTelephone", formData.numeroTelephone);
+       formDataToSend.append("localisation", formData.localisation);
+        // formDataToSend.append("dateDisponibilite", formData.dateDisponibilite);
+        formDataToSend.append("offerId", id);
+        formDataToSend.append("cv", formData.cv); 
+    
         try {
             const response = await fetch(`/api/Application`, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(payload),
+                body: formDataToSend, 
             });
-
+    
             if (response.ok) {
                 alert("Application submitted successfully!");
             } else {
@@ -43,13 +56,14 @@ function Form({ id, onSubmit }) {
             alert("Failed to submit application.");
         }
     };
+    
 
     return (
         <div className="bg-white shadow-lg rounded-lg p-8">
             <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
                 Apply for this Offer
             </h2>
-            <form className="space-y-6" onSubmit={handleSubmit}>
+            <form className="space-y-6" onSubmit={handleSubmit} encType="multipart/form-data">
                 <div>
                     <label htmlFor="nom" className="block text-sm font-medium text-gray-700">
                         Nom
@@ -136,7 +150,7 @@ function Form({ id, onSubmit }) {
                         placeholder="Votre localisation"
                     />
                 </div>
-                <div>
+                {/* <div>
                     <label htmlFor="dateDisponibilite" className="block text-sm font-medium text-gray-700">
                         Date de disponibilité
                     </label>
@@ -149,7 +163,7 @@ function Form({ id, onSubmit }) {
                         required
                         className="mt-2 w-full border border-gray-300 rounded-lg shadow-sm p-3 focus:ring-purple-500 focus:border-purple-500"
                     />
-                </div>
+                </div> */}
                 <div>
                     <input id="offerId" name="offerId" type="hidden" value={id} />
                 </div>
