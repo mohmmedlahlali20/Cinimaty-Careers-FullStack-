@@ -2,11 +2,18 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Menu, X, Moon, Sun } from 'lucide-react'
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isDarkMode, setIsDarkMode] = useState(false)
+  const pathname = usePathname()
+
+  useEffect(() => {
+    const darkModePreference = localStorage.getItem('darkMode')
+    setIsDarkMode(darkModePreference === 'true')
+  }, [])
 
   useEffect(() => {
     if (isDarkMode) {
@@ -14,13 +21,21 @@ const Navbar = () => {
     } else {
       document.documentElement.classList.remove('dark')
     }
+    localStorage.setItem('darkMode', isDarkMode.toString())
   }, [isDarkMode])
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
   const toggleDarkMode = () => setIsDarkMode(!isDarkMode)
 
+  const navLinks = [
+    { href: '/', label: 'Home' },
+    { href: '/about', label: 'About' },
+    { href: '/services', label: 'Services' },
+    { href: '/contact', label: 'Contact' },
+  ]
+
   return (
-    <nav className="bg-white dark:bg-gray-800 shadow-lg">
+    <nav className="bg-white dark:bg-gray-800 fixed w-full z-10 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
@@ -29,10 +44,19 @@ const Navbar = () => {
             </Link>
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
-                <Link href="/" className="text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium">Home</Link>
-                <Link href="/about" className="text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium">About</Link>
-                <Link href="/services" className="text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium">Services</Link>
-                <Link href="/contact" className="text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium">Contact</Link>
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`px-3 py-2 rounded-md text-sm font-medium ${
+                      pathname === link.href
+                        ? 'bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white'
+                        : 'text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
               </div>
             </div>
           </div>
@@ -40,6 +64,7 @@ const Navbar = () => {
             <button
               onClick={toggleDarkMode}
               className="text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+              aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
             >
               {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
@@ -48,6 +73,8 @@ const Navbar = () => {
             <button
               onClick={toggleMenu}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-menu"
             >
               <span className="sr-only">Open main menu</span>
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -56,24 +83,31 @@ const Navbar = () => {
         </div>
       </div>
 
-      {isMenuOpen && (
-        <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <Link href="/" className="text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium">Home</Link>
-            <Link href="/about" className="text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium">About</Link>
-            <Link href="/services" className="text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium">Services</Link>
-            <Link href="/contact" className="text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium">Contact</Link>
-          </div>
-          <div className="pt-4 pb-3 border-t border-gray-300 dark:border-gray-700">
-            <button
-              onClick={toggleDarkMode}
-              className="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
+      <div className={`md:hidden ${isMenuOpen ? 'block' : 'hidden'}`} id="mobile-menu">
+        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`block px-3 py-2 rounded-md text-base font-medium ${
+                pathname === link.href
+                  ? 'bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white'
+                  : 'text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700'
+              }`}
             >
-              {isDarkMode ? 'Light Mode' : 'Dark Mode'}
-            </button>
-          </div>
+              {link.label}
+            </Link>
+          ))}
         </div>
-      )}
+        <div className="pt-4 pb-3 border-t border-gray-300 dark:border-gray-700">
+          <button
+            onClick={toggleDarkMode}
+            className="mt-1 block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
+          >
+            {isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+          </button>
+        </div>
+      </div>
     </nav>
   )
 }
