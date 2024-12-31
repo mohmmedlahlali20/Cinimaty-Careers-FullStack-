@@ -1,7 +1,7 @@
 import multer from 'multer';
-import dbConnect from 'pages/config/mongodb';
-import Application from 'pages/models/Application';
-import cloudinary from 'pages/config/cloudinary';
+import dbConnect from '../config/mongodb';
+import Application from '../models/Application';
+import cloudinary from '../config/cloudinary'
 import { parse } from 'date-fns';
 
 const upload = multer({ storage: multer.memoryStorage() });
@@ -45,7 +45,7 @@ export default async function Postuler(req, res) {
       letterCover,
       numeroTelephone,
       localisation,
-      dateDisponibilite,
+      // dateDisponibilite,
       offerId,
     } = req.body;
 
@@ -58,22 +58,23 @@ export default async function Postuler(req, res) {
         !letterCover ||
         !numeroTelephone ||
         !localisation ||
-        !dateDisponibilite ||
+        // !dateDisponibilite ||
         !offerId
     ) {
       return res.status(400).json({ success: false, message: 'Tous les champs sont requis.' });
     }
 
-    const parsedDate = parse(dateDisponibilite, 'dd/MM/yyyy', new Date());
-    if (isNaN(parsedDate)) {
-      return res
-          .status(400)
-          .json({ success: false, message: 'La date de disponibilité est invalide.' });
-    }
+    // const parsedDate = parse(dateDisponibilite, 'dd/MM/yyyy', new Date());
+    // if (isNaN(parsedDate)) {
+    //   return res
+    //       .status(400)
+    //       .json({ success: false, message: 'La date de disponibilité est invalide.' });
+    // }
     const uploadResult = await uploadToCloudinary(cvFile.buffer, {
       folder: 'job-applications',
       resource_type: 'raw',
       public_id: `${nom}_${prenom}_CV`,
+      format: 'pdf',
       use_filename: true,
     });
 
@@ -86,7 +87,7 @@ export default async function Postuler(req, res) {
       letterCover,
       numeroTelephone,
       localisation,
-      dateDisponibilite: parsedDate,
+      // dateDisponibilite: parsedDate,
       offerId,
     });
 
