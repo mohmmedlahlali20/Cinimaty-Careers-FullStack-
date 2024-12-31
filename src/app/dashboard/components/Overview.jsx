@@ -2,8 +2,6 @@
 
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "./ui/recharts"
 
-// import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts"
-
 const data = [
   {
     name: "Jan",
