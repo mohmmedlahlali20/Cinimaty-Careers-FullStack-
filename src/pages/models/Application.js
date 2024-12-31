@@ -31,11 +31,11 @@ const ApplicationSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    dateDisponibilite:
-    {
-        type: Date,
-        required: true
-    },
+    // dateDisponibilite:
+    // {
+    //     type: Date,
+    //     required: true
+    // },
     offerId:
     {
         type: mongoose.Schema.Types.ObjectId,
