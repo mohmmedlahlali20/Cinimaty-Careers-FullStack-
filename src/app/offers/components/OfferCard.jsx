@@ -29,8 +29,9 @@ const OfferCard = ({ offer }) => {
                 </p>
                 <div className="flex flex-wrap gap-2 mt-4">
                     <span className="inline-block bg-purple-100 text-purple-800 text-sm font-semibold px-4 py-2 rounded-full">
-                        {offer.slayer}
+                        {offer.salary}
                     </span>
+                    <span className="inline-block bg-blue-100 text-blue-800 text-sm font-semibold px-4 py-2 rounded-full">{offer.companyName}</span>
                     <div className="flex flex-wrap gap-2 mt-4">
                         {offer.competences.map((competence, index) => (
                             <span
