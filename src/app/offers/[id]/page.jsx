@@ -18,7 +18,7 @@ export default async function OfferPage({ params }) {
                             {offer.competences.map((competence, index) => (
                                 <li
                                     key={index}
-                                    className="text-gray-600 bg-purple-100 px-4 py-2 rounded-lg shadow-sm inline-block"
+                                    className="text-gray-600 m-3 bg-purple-100 px-4 py-2 rounded-lg shadow-sm inline-block"
                                 >
                                     {competence}
                                 </li>
