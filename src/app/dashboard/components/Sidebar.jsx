@@ -8,7 +8,7 @@ import { LayoutDashboard, Users, ShoppingCart, Settings, ChevronLeft, ChevronRig
 const menuItems = [
   { id: 1, label: "Dashboard", icon: LayoutDashboard, link: "/dashboard" },
   { id: 2, label: "Users", icon: Users, link: "/dashboard/users" },
-  { id: 3, label: "Products", icon: ShoppingCart, link: "/dashboard/products" },
+  { id: 3, label: "Offers", icon: ShoppingCart, link: "/dashboard/Offers" },
   { id: 4, label: "Settings", icon: Settings, link: "/dashboard/settings" },
 ]
 
