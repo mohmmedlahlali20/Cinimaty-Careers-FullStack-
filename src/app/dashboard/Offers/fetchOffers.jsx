@@ -1,7 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { Button } from '../components/ui/button';
-import AddNewOffer from './AddNewOffer';
+import AddNewOffer from '../../(RH)/Offers/AddNewOffer';
 import fetchOffers from '../../(client)/offers/utils/getOffers';
 
 const OffersAdmin = () => {
@@ -96,16 +95,7 @@ const OffersAdmin = () => {
                         <option value="closed">Closed</option>
                     </select>
                 </div>
-                <div>
-                    <Button
-                        className="mr-2"
-                        variant="outline"
-                        onClick={() => setIsPopupOpen(true)}
-                    >
-                        Create Offers
-                    </Button>
-                   
-                </div>
+               
             </div>
 
             <div>
