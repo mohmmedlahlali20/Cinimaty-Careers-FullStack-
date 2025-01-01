@@ -1,5 +1,5 @@
-import dbConnect from "pages/config/mongodb";
-import User from "pages/models/User";
+import dbConnect from "../config/mongodb";
+import User from "../models/User";
 import bcrypt from "bcryptjs";
 
 export default async function register(req, res) {
