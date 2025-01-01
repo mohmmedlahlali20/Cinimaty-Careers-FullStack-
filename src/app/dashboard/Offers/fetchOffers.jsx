@@ -1,8 +1,8 @@
 'use client';
-import fetchOffers from '../../offers/utils/getOffers';
 import React, { useEffect, useState } from 'react';
 import { Button } from '../components/ui/button';
 import AddNewOffer from './AddNewOffer';
+import fetchOffers from '../../(client)/offers/utils/getOffers';
 
 const OffersAdmin = () => {
     const [offers, setOffers] = useState([]);
