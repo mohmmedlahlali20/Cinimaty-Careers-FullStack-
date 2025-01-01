@@ -3,14 +3,23 @@
 import { useState } from 'react';
 import { Button } from "../../components/ui/button";
 import AddNewOffer from "../Offers/AddNewOffer";
+import Swal from "sweetalert2";
 
 export default function CreateJobOffer({ onCreateOffer }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const handleSave = (newOffer) => {
     onCreateOffer(newOffer);
-    alert("Job offer created successfully!");
-    setIsPopupOpen(false); 
+    Swal.fire({
+      icon: "success",
+      title: "Success!",
+      text: "Job offer created successfully!",
+      timer: 2000,
+      showConfirmButton: false,
+      toast: true,
+      position: "top-right",
+    });
+    setIsPopupOpen(false);
   };
 
   return (
