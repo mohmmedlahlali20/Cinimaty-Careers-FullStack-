@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from "react";
 import Link from "next/link";
-import path from "app/utils/path";
+import path from "../../utils/path";
 
 export default function Register() {
     const [email, setEmail] = useState("");

@@ -25,7 +25,7 @@ export default function LoginForm() {
         try {
             const res = await axios.post('/api/login', { email, password });
             Cookies.set('token', res.data.token);
-            window.location.href = '/dashboard';
+            window.location.href = '/offers';
         } catch (err) {
             setErrorMessage(err.response?.data?.message || 'Login failed. Please try again.');
         } finally {
