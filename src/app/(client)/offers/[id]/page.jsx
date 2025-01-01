@@ -1,36 +1,18 @@
-'use client'
-import React, { useEffect, useState } from "react";
-import fetchOffer from "../utils/GetOneOffer"; 
+import React from "react";
 import Form from "./components/Form";
+import fetchOffer from "../utils/GetOneOffer";
 import { Briefcase, MapPin, CreditCard, Building, Mail, Phone, Calendar, CheckCircle } from 'lucide-react';
 
-export default function OfferPage({ params }) {
+export default async function OfferPage({ params }) {
     const { id } = params;
-    const [offer, setOffer] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const getOffer = async () => {
-            try {
-                const fetchedOffer = await fetchOffer(id);
-                setOffer(fetchedOffer);
-            } catch (error) {
-                setError('Failed to fetch offer details. Please try again later.');
-            } finally {
-                setLoading(false);
-            }
-        };
+    let offer;
+    let error = null;
 
-        getOffer();
-    }, [id]);
-
-    if (loading) {
-        return (
-            <div className="min-h-screen flex items-center justify-center bg-gray-100">
-                <div className="text-xl font-semibold text-gray-700 animate-pulse">Loading...</div>
-            </div>
-        );
+    try {
+        offer = await fetchOffer(id);
+    } catch (err) {
+        error = 'Failed to fetch offer details. Please try again later.';
     }
 
     if (error) {
@@ -87,7 +69,6 @@ export default function OfferPage({ params }) {
                             <div className="px-4 py-5 sm:p-6">
                                 <h2 className="text-xl font-semibold text-gray-900 mb-4">Détails de l'offre</h2>
                                 <dl className="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
-                                   
                                     <div className="sm:col-span-1">
                                         <dt className="text-sm font-medium text-gray-500">Status</dt>
                                         <dd className="mt-1 text-sm text-gray-900 flex items-center">
@@ -134,4 +115,3 @@ export default function OfferPage({ params }) {
         </div>
     );
 }
-

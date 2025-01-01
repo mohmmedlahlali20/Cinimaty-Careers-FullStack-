@@ -1,8 +1,9 @@
 'use client'
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 
 function Form({ id, onSubmit }) {
-    console.log(id);
+
 
     const [formData, setFormData] = useState({
         nom: "",
@@ -46,14 +47,34 @@ function Form({ id, onSubmit }) {
             });
     
             if (response.ok) {
-                alert("Application submitted successfully!");
-            } else {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "application was success",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+                           
+                
+                } else {
                 const errorData = await response.json();
-                alert(`Error: ${errorData.message}`);
+                Swal.fire({
+                    position: "top-end",
+                    icon: "warning",
+                    title: `faild application ${errorData.message}`,
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+                     
             }
-        } catch (error) {
-            console.error("Submission error:", error);
-            alert("Failed to submit application.");
+        } catch (err) {
+            Swal.fire({
+                position: "top-end",
+                icon: "danger",
+                title: `faild application ${err}`,
+                showConfirmButton: false,
+                timer: 1500
+              });
         }
     };
     
