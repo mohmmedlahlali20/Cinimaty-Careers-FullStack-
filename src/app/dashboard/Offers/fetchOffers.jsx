@@ -1,6 +1,5 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import AddNewOffer from '../../(RH)/Offers/AddNewOffer';
 import fetchOffers from '../../(client)/offers/utils/getOffers';
 
 const OffersAdmin = () => {
@@ -97,16 +96,6 @@ const OffersAdmin = () => {
                 </div>
                
             </div>
-
-            <div>
-            {isPopupOpen && (
-                        <AddNewOffer
-                            onClose={() => setIsPopupOpen(false)}
-                            onSave={handleAddOffer}
-                        />
-                    )}
-            </div>
-
             <div className="overflow-x-auto shadow-lg rounded-lg bg-white">
                 <table className="table-auto w-full">
                     <thead className="bg-gray-700 text-white">
