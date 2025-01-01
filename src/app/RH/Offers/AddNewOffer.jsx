@@ -23,24 +23,40 @@ const AddNewOffer = ({ onClose, onSave }) => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSave(formData);
-    setFormData({
-      title: '',
-      description: '',
-      salary: '',
-      contract: '',
-      localisation: '',
-      companyName: '',
-      status: '',
-      contactEmail: '',
-      contactPhone: '',
-      competences: '',
-    });
-    onClose();
+    try {
+      await onSave(formData);
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Offer created successfully!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      setFormData({
+        title: '',
+        description: '',
+        salary: '',
+        contract: '',
+        localisation: '',
+        companyName: '',
+        status: '',
+        contactEmail: '',
+        contactPhone: '',
+        competences: '',
+      });
+      onClose();
+    } catch (error) {
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: `Error creating offer: ${error.message}`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
   };
-
   const nextStep = () => setCurrentStep((prev) => prev + 1);
   const prevStep = () => setCurrentStep((prev) => prev - 1);
 
