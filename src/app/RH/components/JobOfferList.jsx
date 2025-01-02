@@ -1,15 +1,17 @@
+'use client'
+
 import { useState } from 'react'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/Table'
 import { Input } from '../../components/ui/input'
 import { Button } from '../../components/ui/button'
 
 
-export default function JobOfferList({ jobOffers, onUpdateOffer, onDeleteOffer }) {
-  const [editingId, setEditingId] = useState(null)
+export default function JobOfferList({ offers = [], onUpdateOffer, onDeleteOffer }) {
+    const [editingId, setEditingId] = useState(null)
   const [editForm, setEditForm] = useState({})
 
   const handleEdit = (offer) => {
-    setEditingId(offer.id)
+    setEditingId(offer._id)
     setEditForm(offer)
   }
 
@@ -27,15 +29,15 @@ export default function JobOfferList({ jobOffers, onUpdateOffer, onDeleteOffer }
       <TableHeader>
         <TableRow>
           <TableHead>Title</TableHead>
-          <TableHead>Department</TableHead>
+          <TableHead>description</TableHead>
           <TableHead>Actions</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {jobOffers.map((offer) => (
-          <TableRow key={offer.id}>
+        {offers.map((offer) => (
+          <TableRow key={offer._id}>
             <TableCell>
-              {editingId === offer.id ? (
+              {editingId === offer._id ? (
                 <Input 
                   name="title"
                   value={editForm.title} 
@@ -45,25 +47,25 @@ export default function JobOfferList({ jobOffers, onUpdateOffer, onDeleteOffer }
               ) : offer.title}
             </TableCell>
             <TableCell>
-              {editingId === offer.id ? (
+              {editingId === offer._id ? (
                 <Input 
-                  name="department"
-                  value={editForm.department} 
+                  name="description"
+                  value={editForm.description} 
                   onChange={handleChange}
                   className='bg-white'
                 />
-              ) : offer.department}
+              ) : offer.description}
             </TableCell>
-            <TableCell>
+             <TableCell>
               {editingId === offer.id ? (
                 <Button onClick={handleSave}>Save</Button>
               ) : (
                 <>
                   <Button onClick={() => handleEdit(offer)} className="mr-2">Edit</Button>
-                  <Button onClick={() => onDeleteOffer(offer.id)} variant="destructive">Delete</Button>
+                  <Button onClick={() => onDeleteOffer(offer._id)} variant="destructive">Delete</Button>
                 </>
               )}
-            </TableCell>
+            </TableCell> 
           </TableRow>
         ))}
       </TableBody>
