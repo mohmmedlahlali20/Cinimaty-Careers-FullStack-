@@ -12,8 +12,8 @@ import React from 'react'
  */
 export function Table({ children, className, ...props }) {
   return (
-    <div className="relative w-full overflow-auto">
-      <table className={`w-full caption-bottom text-sm ${className}`} {...props}>
+    <div className="relative w-full overflow-x-auto">
+      <table className={`min-w-full caption-bottom text-sm text-gray-700 ${className}`} {...props}>
         {children}
       </table>
     </div>
@@ -32,7 +32,7 @@ export function Table({ children, className, ...props }) {
  */
 export function TableHeader({ children, className, ...props }) {
   return (
-    <thead className={`[&_tr]:border-b ${className}`} {...props}>
+    <thead className={`bg-gray-100 text-gray-600 ${className}`} {...props}>
       {children}
     </thead>
   )
@@ -49,7 +49,7 @@ export function TableHeader({ children, className, ...props }) {
  * @param {TableBodyProps} props
  */
 export function TableBody({ children, className, ...props }) {
-  return <tbody className={`[&_tr:last-child]:border-0 ${className}`} {...props}>{children}</tbody>
+  return <tbody className={`${className}`} {...props}>{children}</tbody>
 }
 
 /**
@@ -65,7 +65,7 @@ export function TableBody({ children, className, ...props }) {
 export function TableRow({ children, className, ...props }) {
   return (
     <tr
-      className={`border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted ${className}`}
+      className={`transition-colors hover:bg-gray-100 even:bg-gray-50 odd:bg-white border-b last:border-0 ${className}`}
       {...props}
     >
       {children}
@@ -86,7 +86,7 @@ export function TableRow({ children, className, ...props }) {
 export function TableHead({ children, className, ...props }) {
   return (
     <th
-      className={`h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 ${className}`}
+      className={`px-6 py-3 text-left font-semibold text-gray-700 uppercase tracking-wider ${className}`}
       {...props}
     >
       {children}
@@ -97,7 +97,7 @@ export function TableHead({ children, className, ...props }) {
 /**
  * @typedef {Object} TableCellProps
  * @property {React.ReactNode} children 
- * @property {string} [className] 
+ * @property {string} [classNam e] 
  */
 
 /**
@@ -107,11 +107,10 @@ export function TableHead({ children, className, ...props }) {
 export function TableCell({ children, className, ...props }) {
   return (
     <td
-      className={`p-4 align-middle [&:has([role=checkbox])]:pr-0 ${className}`}
+      className={`px-6 py-4 text-sm text-gray-600 align-middle ${className}`}
       {...props}
     >
       {children}
     </td>
   )
 }
-
