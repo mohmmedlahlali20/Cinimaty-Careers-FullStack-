@@ -179,17 +179,17 @@ function Form({id}) {
         </div>
 
         <input
-          type="text"
+          type="hidden"
           name="OfferName"
           value={formData.OfferName}
         />
         <input
-          type="text"
+          type="hidden"
           name="condidateurName"
           value={formData.condidateurName}
         />
         <input
-          type="text"
+          type="hidden"
           name="condidateurEmail"
           value={formData.condidateurEmail}
         />
@@ -201,7 +201,7 @@ function Form({id}) {
           Submit Application
         </button>
       </form>
-    </div>  
+    </div>
   );
 }
 
