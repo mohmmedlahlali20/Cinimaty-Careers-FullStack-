@@ -1,0 +1,18 @@
+version: "3.8"  # or just omit the version key for docker-compose v2
+
+services:
+  nextjs:
+    build: .
+    container_name: nextjs-app
+    ports:
+      - "3000:3000"  # Expose port 3000 to access the app
+    volumes:
+      - .:/app  # Mount the local directory to the container
+    environment:
+      NODE_ENV: production
+    networks:
+      - nextjs-network
+
+networks:
+  nextjs-network:
+    driver: bridge
