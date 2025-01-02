@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { X } from 'lucide-react';
+import Swal from 'sweetalert2';
 
 const AddNewOffer = ({ onClose, onSave }) => {
   const [currentStep, setCurrentStep] = useState(1);
