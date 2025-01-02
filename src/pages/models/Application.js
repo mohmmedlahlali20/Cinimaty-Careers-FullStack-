@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { trusted } from 'mongoose';
 
 const ApplicationSchema = new mongoose.Schema({
     nom:
@@ -31,15 +31,16 @@ const ApplicationSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    // dateDisponibilite:
-    // {
-    //     type: Date,
-    //     required: true
-    // },
-    offerId:
-    {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Offer',
+    OfferName: {
+        type: String,
+        required: true
+    },
+    condidateurName: {
+        type: String,
+        required: true
+    },
+    condidateurEmail: {
+        type: String,
         required: true
     }
 
