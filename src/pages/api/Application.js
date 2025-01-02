@@ -45,8 +45,9 @@ export default async function Postuler(req, res) {
       letterCover,
       numeroTelephone,
       localisation,
-      // dateDisponibilite,
-      offerId,
+      condidateurName,
+      condidateurEmail,
+      OfferName
     } = req.body;
 
     const cvFile = req.file;
@@ -58,8 +59,9 @@ export default async function Postuler(req, res) {
         !letterCover ||
         !numeroTelephone ||
         !localisation ||
-        // !dateDisponibilite ||
-        !offerId
+        !OfferName ||
+        !condidateurEmail ||
+        !condidateurName
     ) {
       return res.status(400).json({ success: false, message: 'Tous les champs sont requis.' });
     }
@@ -87,8 +89,9 @@ export default async function Postuler(req, res) {
       letterCover,
       numeroTelephone,
       localisation,
-      // dateDisponibilite: parsedDate,
-      offerId,
+      OfferName,
+      condidateurName,
+      condidateurEmail,
     });
 
     res.status(201).json({ success: true, data: application });
