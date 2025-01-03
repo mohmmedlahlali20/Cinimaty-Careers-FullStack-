@@ -1,18 +1,33 @@
-version: "3.8"  # or just omit the version key for docker-compose v2
+version: "3.8"
 
 services:
   nextjs:
-    build: .
-    container_name: nextjs-app
+    build:
+      context: ./
+      dockerfile: Dockerfile
     ports:
-      - "3000:3000"  # Expose port 3000 to access the app
-    volumes:
-      - .:/app  # Mount the local directory to the container
+      - "3000:3000"
     environment:
-      NODE_ENV: production
-    networks:
-      - nextjs-network
+      - MONGODB_URI=${MONGODB_URI}
+      - JWT_SECRET=${JWT_SECRET}
+      - NEXT_PUBLIC_API_BASE_URL=${NEXT_PUBLIC_API_BASE_URL}
+      - NEXT_PUBLIC_API_BASE_URL_NEST=${NEXT_PUBLIC_API_BASE_URL_NEST}
+      - CLOUDINARY_CLOUD_NAME=${CLOUDINARY_CLOUD_NAME}
+      - CLOUDINARY_API_KEY=${CLOUDINARY_API_KEY}
+      - CLOUDINARY_API_SECRET=${CLOUDINARY_API_SECRET}
+    depends_on:
+      - mongodb
+    volumes:
+      - .:/app
+      - /app/node_modules
 
-networks:
-  nextjs-network:
-    driver: bridge
+  mongodb:
+    image: mongo:6
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:
