@@ -1,127 +1,99 @@
 import Link from 'next/link'
-import { Search, Briefcase, MapPin, ArrowRight } from 'lucide-react'
+import { ArrowRight, Briefcase, MapPin, Search } from 'lucide-react'
 import Navbar from './components/Navbar'
-
-const featuredJobs = [
-  { id: 1, title: 'Senior Frontend Developer', company: 'TechCorp', location: 'Remote', salary: '80,000 - 120,000 MAD' },
-  { id: 2, title: 'UX Designer', company: 'DesignHub', location: 'Casablanca', salary: '60,000 - 90,000 MAD' },
-  { id: 3, title: 'Data Analyst', company: 'DataDrive', location: 'Rabat', salary: '70,000 - 100,000 MAD' },
-  { id: 4, title: 'Full Stack Developer', company: 'WebSolutions', location: 'Marrakech', salary: '75,000 - 110,000 MAD' },
-]
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navbar/>
+      <Navbar />
       <main>
-        <section className="bg-gray-700 text-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-            <div className="text-center">
-              <h1 className="text-4xl font-extrabold sm:text-5xl md:text-6xl">
-                Find Your Dream Job in Morocco
-              </h1>
-              <p className="mt-3 max-w-md mx-auto text-xl sm:text-2xl md:mt-5 md:max-w-3xl">
-                Discover thousands of job opportunities across Morocco. Your next career move starts here.
-              </p>
+        <section className="relative bg-gradient-to-r from-indigo-600 to-indigo-800 text-white py-28">
+          <div className="absolute inset-0 bg-black opacity-50"></div>
+          <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 text-center">
+            <h1 className="text-5xl font-extrabold leading-tight sm:text-6xl md:text-7xl text-white">
+              Find Your Dream Job in Morocco
+            </h1>
+            <p className="mt-4 max-w-xl mx-auto text-lg sm:text-xl md:mt-6 text-gray-200">
+              Discover thousands of job opportunities across Morocco. Your next career move starts here.
+            </p>
+            <div className="mt-8 flex justify-center">
+              <Link href="/offers" className="inline-flex items-center px-10 py-4 bg-blue-500 hover:bg-blue-600 text-lg font-semibold rounded-full shadow-xl transition duration-300 transform hover:scale-105">
+                Explore Jobs
+                <ArrowRight className="h-5 w-5 ml-2" />
+              </Link>
             </div>
-          </div>
-        </section>
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <h2 className="text-3xl font-extrabold text-gray-900 mb-8">Featured Job Opportunities</h2>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {featuredJobs.map((job) => (
-              <div key={job.id} className="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transition-shadow duration-300">
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">{job.title}</h3>
-                <p className="text-gray-600 mb-4">{job.company}</p>
-                <div className="flex items-center text-gray-500 mb-2">
-                  <MapPin className="h-5 w-5 mr-2" />
-                  {job.location}
-                </div>
-                <div className="flex items-center text-gray-500 mb-4">
-                  <Briefcase className="h-5 w-5 mr-2" />
-                  {job.salary}
-                </div>
-                <Link href={`/jobs/${job.id}`} className="text-blue-600 hover:text-blue-800 font-medium flex items-center">
-                  View Details
-                  <ArrowRight className="h-4 w-4 ml-1" />
-                </Link>
-              </div>
-            ))}
-          </div>
-          <div className="text-center mt-12">
-            <Link href="/jobs" className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
-              View All Jobs
-              <ArrowRight className="h-5 w-5 ml-2" />
-            </Link>
           </div>
         </section>
 
-        <section className="bg-gray-100">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            <div className="bg-white shadow-xl rounded-lg overflow-hidden">
-              <div className="px-6 py-12 md:p-12 text-center md:text-left md:flex md:items-center md:justify-between">
-                <div>
-                  <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-                    Are you an employer?
-                  </h2>
-                  <p className="mt-3 max-w-3xl text-xl text-gray-500">
-                    Post your job openings and find the perfect candidates for your company.
-                  </p>
-                </div>
-                <div className="mt-8 md:mt-0 md:ml-8">
-                  <Link href="/employers/post-job" className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
-                    Post a Job
-                    <ArrowRight className="h-5 w-5 ml-2" />
-                  </Link>
-                </div>
+        
+
+        <section className="bg-gray-100 py-20">
+          <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 text-center">
+            <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+              Why Choose JobConnect?
+            </h2>
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-16">
+              <div className="flex flex-col items-center text-center bg-white p-6 rounded-lg shadow-lg">
+                <Briefcase className="h-12 w-12 text-indigo-600 mb-4" />
+                <h3 className="text-xl font-semibold text-gray-900">Endless Opportunities</h3>
+                <p className="mt-4 text-gray-600">Browse thousands of job listings that match your skills and experience.</p>
+              </div>
+              <div className="flex flex-col items-center text-center bg-white p-6 rounded-lg shadow-lg">
+                <MapPin className="h-12 w-12 text-indigo-600 mb-4" />
+                <h3 className="text-xl font-semibold text-gray-900">Location Flexibility</h3>
+                <p className="mt-4 text-gray-600">Find job opportunities in your city or explore new locations around Morocco.</p>
+              </div>
+              <div className="flex flex-col items-center text-center bg-white p-6 rounded-lg shadow-lg">
+                <Search className="h-12 w-12 text-indigo-600 mb-4" />
+                <h3 className="text-xl font-semibold text-gray-900">Easy Search</h3>
+                <p className="mt-4 text-gray-600">Use powerful filters to refine your job search based on your preferences.</p>
               </div>
             </div>
           </div>
         </section>
+
+        <footer className="bg-gray-800 text-white py-12">
+          <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
+              <div>
+                <h3 className="text-lg font-semibold mb-4">For Job Seekers</h3>
+                <ul className="space-y-2">
+                  <li><Link href="/jobs" className="hover:text-blue-400">Browse Jobs</Link></li>
+                  <li><Link href="/companies" className="hover:text-blue-400">Companies</Link></li>
+                  <li><Link href="/career-advice" className="hover:text-blue-400">Career Advice</Link></li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold mb-4">For Employers</h3>
+                <ul className="space-y-2">
+                  <li><Link href="/employers/post-job" className="hover:text-blue-400">Post a Job</Link></li>
+                  <li><Link href="/employers/pricing" className="hover:text-blue-400">Pricing</Link></li>
+                  <li><Link href="/employers/resources" className="hover:text-blue-400">Resources</Link></li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Company</h3>
+                <ul className="space-y-2">
+                  <li><Link href="/about" className="hover:text-blue-400">About Us</Link></li>
+                  <li><Link href="/contact" className="hover:text-blue-400">Contact</Link></li>
+                  <li><Link href="/privacy" className="hover:text-blue-400">Privacy Policy</Link></li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Connect</h3>
+                <ul className="space-y-2">
+                  <li><Link href="#" className="hover:text-blue-400">Facebook</Link></li>
+                  <li><Link href="#" className="hover:text-blue-400">Twitter</Link></li>
+                  <li><Link href="#" className="hover:text-blue-400">LinkedIn</Link></li>
+                </ul>
+              </div>
+            </div>
+            <div className="mt-12 text-center text-gray-400">
+              <p>&copy; 2023 JobConnect. All rights reserved.</p>
+            </div>
+          </div>
+        </footer>
       </main>
-
-      <footer className="bg-gray-800 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div>
-              <h3 className="text-lg font-semibold mb-4">For Job Seekers</h3>
-              <ul className="space-y-2">
-                <li><Link href="/jobs" className="hover:text-blue-400">Browse Jobs</Link></li>
-                <li><Link href="/companies" className="hover:text-blue-400">Companies</Link></li>
-                <li><Link href="/career-advice" className="hover:text-blue-400">Career Advice</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">For Employers</h3>
-              <ul className="space-y-2">
-                <li><Link href="/employers/post-job" className="hover:text-blue-400">Post a Job</Link></li>
-                <li><Link href="/employers/pricing" className="hover:text-blue-400">Pricing</Link></li>
-                <li><Link href="/employers/resources" className="hover:text-blue-400">Resources</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Company</h3>
-              <ul className="space-y-2">
-                <li><Link href="/about" className="hover:text-blue-400">About Us</Link></li>
-                <li><Link href="/contact" className="hover:text-blue-400">Contact</Link></li>
-                <li><Link href="/privacy" className="hover:text-blue-400">Privacy Policy</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Connect</h3>
-              <ul className="space-y-2">
-                <li><Link href="#" className="hover:text-blue-400">Facebook</Link></li>
-                <li><Link href="#" className="hover:text-blue-400">Twitter</Link></li>
-                <li><Link href="#" className="hover:text-blue-400">LinkedIn</Link></li>
-              </ul>
-            </div>
-          </div>
-          <div className="mt-8 pt-8 border-t border-gray-700 text-center">
-            <p>&copy; 2023 JobConnect. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
     </div>
   )
 }
-
