@@ -1,8 +1,7 @@
 import multer from 'multer';
 import dbConnect from '../config/mongodb';
 import Application from '../models/Application';
-import cloudinary from '../config/cloudinary'
-import { parse } from 'date-fns';
+import cloudinary from '../config/cloudinary';
 
 const upload = multer({ storage: multer.memoryStorage() });
 
@@ -39,40 +38,24 @@ export default async function Postuler(req, res) {
   await dbConnect();
 
   try {
-    const {
-      nom,
-      prenom,
-      letterCover,
-      numeroTelephone,
-      localisation,
-      condidateurName,
-      condidateurEmail,
-      OfferName
-    } = req.body;
+    // Ensure body parsing after multer processes the file
+    const { nom, prenom, letterCover, numeroTelephone, localisation, condidateurName, condidateurEmail, OfferName } = req.body;
 
-    const cvFile = req.file;
-
+    // Handle optional fields and check if everything is filled
     if (
-        !nom ||
-        !prenom ||
-        !cvFile ||
-        !letterCover ||
-        !numeroTelephone ||
-        !localisation ||
-        !OfferName ||
-        !condidateurEmail ||
-        !condidateurName
+      !nom || !prenom || !req.file || !letterCover ||
+      !numeroTelephone || !localisation || !OfferName || !condidateurEmail || !condidateurName
     ) {
       return res.status(400).json({ success: false, message: 'Tous les champs sont requis.' });
     }
 
+    // You can parse date here if required
     // const parsedDate = parse(dateDisponibilite, 'dd/MM/yyyy', new Date());
     // if (isNaN(parsedDate)) {
-    //   return res
-    //       .status(400)
-    //       .json({ success: false, message: 'La date de disponibilité est invalide.' });
+    //   return res.status(400).json({ success: false, message: 'La date de disponibilité est invalide.' });
     // }
-    const uploadResult = await uploadToCloudinary(cvFile.buffer, {
+
+    const uploadResult = await uploadToCloudinary(req.file.buffer, {
       folder: 'job-applications',
       resource_type: 'raw',
       public_id: `${nom}_${prenom}_CV`,
