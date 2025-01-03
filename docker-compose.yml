@@ -3,8 +3,8 @@ version: "3.8"
 services:
   nextjs:
     build:
-      context: ./
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./dockerfile
     ports:
       - "3000:3000"
     environment:
@@ -18,8 +18,7 @@ services:
     depends_on:
       - mongodb
     volumes:
-      - .:/app
-      - /app/node_modules
+    - .:/app
 
   mongodb:
     image: mongo:6
