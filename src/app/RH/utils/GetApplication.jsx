@@ -1,8 +1,8 @@
 async function FetchApplication() {
     try {
-      const response = await fetch('/api/GetApplication'); // Adjust URL as needed
+      const response = await fetch('/api/GetApplication'); 
       const data = await response.json();
-      return Array.isArray(data?.data) ? data.data : []; // Ensure it's an array
+      return Array.isArray(data?.data) ? data.data : []; 
     } catch (error) {
       console.error('Error fetching applications:', error);
       return [];
