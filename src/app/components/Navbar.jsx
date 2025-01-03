@@ -29,8 +29,8 @@ const Navbar = () => {
 
   const navLinks = [
     { href: '/', label: 'Home' },
-    { href: '/about', label: 'About' },
-    { href: '/services', label: 'Services' },
+    { href: '/offers', label: 'Offers' },
+    { href: '/condidateur', label: 'Condidateur' },
     { href: '/contact', label: 'Contact' },
   ]
 
@@ -60,6 +60,24 @@ const Navbar = () => {
               </div>
             </div>
           </div>
+
+
+
+
+          <div className="hidden md:flex space-x-4">
+            <Link href="/login">
+              <button className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-700">
+                Login
+              </button>
+            </Link>
+            <Link href="/register">
+              <button className="px-4 py-2 bg-gray-900 text-white rounded-md hover:bg-gray-700">
+                Register
+              </button>
+            </Link>
+          </div>
+
+
           <div className="hidden md:block">
             <button
               onClick={toggleDarkMode}
@@ -69,7 +87,9 @@ const Navbar = () => {
               {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
           </div>
-          <div className="-mr-2 flex md:hidden">
+
+
+          <div className=" flex md:hidden">
             <button
               onClick={toggleMenu}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
@@ -100,12 +120,25 @@ const Navbar = () => {
           ))}
         </div>
         <div className="pt-4 pb-3 border-t border-gray-300 dark:border-gray-700">
+        <div className="mt-4">
+            <Link href="/login">
+              <button className="w-full px-3 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700">
+                Login
+              </button>
+            </Link>
+            <Link href="/register">
+              <button className="w-full mt-2 px-3 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-700">
+                Register
+              </button>
+            </Link>
+          </div>
           <button
             onClick={toggleDarkMode}
             className="mt-1 block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
           >
             {isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
           </button>
+         
         </div>
       </div>
     </nav>
@@ -113,4 +146,3 @@ const Navbar = () => {
 }
 
 export default Navbar
-
