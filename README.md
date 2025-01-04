@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Cinimaty Careers FullStack 🚀
 
-## Getting Started
+Cinimaty Careers FullStack est une application web complète développée avec **Next.js** pour le frontend et **NestJS** pour le backend. Ce projet permet aux utilisateurs de rechercher des offres d'emploi par titre, de postuler, et de gérer les offres et les candidatures à travers des dashboards dédiés pour **Admin**, **RH**, et **Candidats**.
 
-First, run the development server:
+## 💻 Fonctionnalités
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Candidats** : 
+  - Visualiser les offres disponibles
+  - Postuler à des offres
+- **RH** : 
+  - Gérer les offres d'emploi
+  - Gérer les candidats (acceptation/rejet)
+- **Admin** :
+  - Gérer le site (utilisateurs, paramètres)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🌐 Planicfication Jira 
+ [![Jira Icon](https://img.icons8.com/color/48/000000/jira.png)](https://mohmmedlaeh81.atlassian.net/jira/software/c/projects/CCA/list) [Lien vers le projet Jira](https://mohmmedlaeh81.atlassian.net/jira/software/c/projects/CCA/list)
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Technologies utilisées
 
-## Learn More
+- **Frontend** : [Next.js](https://nextjs.org/) avec **React** <img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/react-original-wordmark.svg" alt="React" height="30" />  <img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/nextjs.png" alt="NextJS" height="30" /></a>
+- **Backend** : [NestJS](https://nestjs.com/) avec TypsScript pour le traitement des offres et la gestion des utilisateurs <img style="margin: 10px" src="https://nestjs.com/img/logo.svg" alt="NestJS" height="30" />
+<img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/typescript-original.svg" alt="TypeScript" height="30" /></a> 
+- **Base de données** : MongoDB avec **Mongoose** <img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/mongodb-original-wordmark.svg" alt="MongoDB" height="30" />
+- **Cloud Storage** : [Cloudinary](https://cloudinary.com/) pour la gestion des images <img style="margin: 10px" src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Cloudinary_logo.png" alt="Cloudinary" height="30" />
+- **CSS Framework** : [Tailwind CSS](https://tailwindcss.com/) <img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/tailwindcss.svg" alt="Tailwind CSS" height="30" />
+- **Test** : [Jest](https://jestjs.io/) pour les tests unitaires, avec [Swagger](https://swagger.io/) pour la documentation de l'API <img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/jest.svg" alt="Jest" height="30" />
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🧪 Tests Unitaires et CI/CD
 
-## Deploy on Vercel
+- Le projet utilise Jest pour les tests unitaires des fonctionnalités.
+- Le projet est dockerisé pour un environnement de développement isolé et reproductible.
+- La pipeline CI/CD est gérée via GitHub Actions pour le déploiement automatisé.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## 🚀 Déploiement
+
+Tu peux déployer le projet via Docker en suivant les étapes ci-dessous.
+
+1. Clone le dépôt :
+
+    ```bash
+    git clone https://github.com/mohmmedlahlali20/Cinimaty-Careers-FullStack-.git
+    ```
+
+2. Accède au répertoire du projet :
+
+    ```bash
+    cd Cinimaty-Careers-FullStack
+    ```
+
+3. Build et démarrage avec Docker :
+
+    ```bash
+    docker-compose up --build
+    ```
+
+
+
+## 📖 Documentation API (Swagger)
+
+La documentation de l'API est disponible à l'adresse suivante après le démarrage du serveur :
+
+    Documentation Swagger
+
+## 📌 Lien vers le dépôt GitHub
+
+Tu peux accéder au code source complet du projet ici : Cinimaty Careers FullStack GitHub
+
+
+## 📦 Dépendances
+
+Voici les principales dépendances utilisées dans le projet :
+
+### Dépendances :
+```json
+"dependencies": {
+  "@material-tailwind/react": "^2.1.10",
+  "@radix-ui/react-tabs": "^1.1.2",
+  "axios": "^1.7.9",
+  "bcryptjs": "^2.4.3",
+  "cloudinary": "^2.5.1",
+  "date-fns": "^4.1.0",
+  "dotenv": "^16.4.7",
+  "js-cookie": "^3.0.5",
+  "jsonwebtoken": "^9.0.2",
+  "jwt-decode": "^4.0.0",
+  "lucide-react": "^0.469.0",
+  "mongoose": "^8.9.2",
+  "multer": "^1.4.5-lts.1",
+  "next": "15.1.2",
+  "next-connect": "^1.0.0",
+  "react": "^18.2.0",
+  "react-dom": "^18.2.0",
+  "react-redux": "^9.2.0",
+  "react-router-dom": "^7.1.1",
+  "swagger-ui-express": "^5.0.1",
+  "sweetalert2": "^11.15.3"
+}
