@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import {jwtDecode} from 'jwt-decode'; 
 
-function Form({id}) {
+function Form() {
   const [formData, setFormData] = useState({
     nom: '',
     prenom: '',
@@ -59,6 +59,9 @@ function Form({id}) {
         method: 'POST',
         body: formDataToSend,
       });
+
+
+      console.log(' body',response.body)
 
       if (response.ok) {
         Swal.fire({

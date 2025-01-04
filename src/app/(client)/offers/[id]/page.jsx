@@ -4,7 +4,7 @@ import fetchOffer from "../utils/GetOneOffer";
 import { Briefcase, MapPin, CreditCard, Building, Mail, Phone, Calendar, CheckCircle } from 'lucide-react';
 
 export default async function OfferPage({ params }) {
-    const { id } = params;
+    const {id} = await params;
 
     let offer;
     let error = null;
