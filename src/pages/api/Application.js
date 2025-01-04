@@ -1,6 +1,7 @@
 import multer from 'multer';
 import dbConnect from '../config/mongodb';
 import Application from '../models/Application';
+
 import cloudinary from '../config/cloudinary';
 
 const upload = multer({ storage: multer.memoryStorage() });
