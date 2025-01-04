@@ -20,7 +20,7 @@ Cinimaty Careers FullStack est une application web complète développée avec *
 ## 🛠️ Technologies utilisées
 
 - **Frontend** : [Next.js](https://nextjs.org/) avec **React** <img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/react-original-wordmark.svg" alt="React" height="30" />  <img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/nextjs.png" alt="NextJS" height="30" /></a>
-- **Backend** : [NestJS](https://nestjs.com/) avec TypsScript pour le traitement des offres et la gestion des utilisateurs <img style="margin: 10px" src="https://nestjs.com/img/logo.svg" alt="NestJS" height="30" />
+- **Backend** : [NestJS](https://nestjs.com/) avec TypsScript pour le traitement des offres <img style="margin: 10px" src="https://nestjs.com/img/logo.svg" alt="NestJS" height="30" />
 <img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/typescript-original.svg" alt="TypeScript" height="30" /></a> 
 - **Base de données** : MongoDB avec **Mongoose** <img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/mongodb-original-wordmark.svg" alt="MongoDB" height="30" />
 - **Cloud Storage** : [Cloudinary](https://cloudinary.com/) pour la gestion des images <img style="margin: 10px" src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Cloudinary_logo.png" alt="Cloudinary" height="30" />
