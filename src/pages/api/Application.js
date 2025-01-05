@@ -3,7 +3,8 @@ import dbConnect from '../config/mongodb';
 import Application from '../models/Application';
 import cloudinary from '../config/cloudinary';
 
-const upload = multer({ storage: multer.memoryStorage() });
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
 export const config = {
   api: {
@@ -22,7 +23,6 @@ async function uploadToCloudinary(fileBuffer, options) {
 }
 
 export default async function Postuler(req, res) {
-  
   if (req.method !== 'POST') {
     return res.status(405).json({ success: false, message: 'Méthode non autorisée.' });
   }
@@ -38,24 +38,34 @@ export default async function Postuler(req, res) {
   await dbConnect();
 
   try {
-    // Ensure body parsing after multer processes the file
-    const { nom, prenom, letterCover, numeroTelephone, localisation, condidateurName, condidateurEmail, OfferName } = req.body;
+    const {
+      nom,
+      prenom,
+      letterCover,
+      numeroTelephone,
+      localisation,
+      condidateurName,
+      condidateurEmail,
+      OfferName,
+    } = req.body;
 
-    // Handle optional fields and check if everything is filled
+    const cvFile = req.file;
+
     if (
-      !nom || !prenom || !req.file || !letterCover ||
-      !numeroTelephone || !localisation || !OfferName || !condidateurEmail || !condidateurName
+        !nom ||
+        !prenom ||
+        !cvFile ||
+        !letterCover ||
+        !numeroTelephone ||
+        !localisation ||
+        !OfferName ||
+        !condidateurEmail ||
+        !condidateurName
     ) {
       return res.status(400).json({ success: false, message: 'Tous les champs sont requis.' });
     }
 
-    // You can parse date here if required
-    // const parsedDate = parse(dateDisponibilite, 'dd/MM/yyyy', new Date());
-    // if (isNaN(parsedDate)) {
-    //   return res.status(400).json({ success: false, message: 'La date de disponibilité est invalide.' });
-    // }
-
-    const uploadResult = await uploadToCloudinary(req.file.buffer, {
+    const uploadResult = await uploadToCloudinary(cvFile.buffer, {
       folder: 'job-applications',
       resource_type: 'raw',
       public_id: `${nom}_${prenom}_CV`,
