@@ -31,7 +31,10 @@
     "react-dom": "^18.2.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.1.1",
+    "swagger-ui": "^5.18.2",
+    "swagger-ui-dist": "^5.18.2",
     "swagger-ui-express": "^5.0.1",
+    "swagger-ui-react": "^5.18.2",
     "sweetalert2": "^11.15.3"
   },
   "devDependencies": {
